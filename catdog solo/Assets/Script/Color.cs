@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Color : MonoBehaviour {
-
+	private float i = 0.0f;
 	// Use this for initialization
 	void Start () {
 		transform.GetComponent<Renderer>().material.color = UnityEngine.Color.white;
@@ -15,20 +15,27 @@ public class Color : MonoBehaviour {
 	}
 	private void OnCollisionEnter(Collision other)
 	{
-		Debug.Log("enter");
-		if (other.transform.tag == "Plane") // 태그는 임시로 설정함.
-		{
-			float or = other.transform.GetComponent<Renderer>().material.color.r;
-			float og = other.transform.GetComponent<Renderer>().material.color.g;
-			float ob = other.transform.GetComponent<Renderer>().material.color.b;
+		if (i == 0.0f)
+		{			
+			if (other.transform.tag == "Plane") // 태그는 임시로 설정함.
+			{
+				float or = other.transform.GetComponent<Renderer>().material.color.r;
+				float og = other.transform.GetComponent<Renderer>().material.color.g;
+				float ob = other.transform.GetComponent<Renderer>().material.color.b;
 
-			ColorLerp(or, og, ob); // 색상 혼합 시작 ~ 완료
+				ColorLerp(or, og, ob); // 색상 혼합 시작 ~ 완료
 
-			is_Black(); // 색상 변환 이후 검은색이 되었는지 확인
-			//transform.GetComponent<Renderer>().material.color = new Vector4(other.transform.GetComponent<Renderer>().material.color.r, other.transform.GetComponent<Renderer>().material.color.g, other.transform.GetComponent<Renderer>().material.color.b, 1.0f);
-			other.transform.GetComponent<Renderer>().material.color = UnityEngine.Color.yellow; //부딪힌 물체 색상 하얀색으로
+				is_Black(); // 색상 변환 이후 검은색이 되었는지 확인
+							//transform.GetComponent<Renderer>().material.color = new Vector4(other.transform.GetComponent<Renderer>().material.color.r, other.transform.GetComponent<Renderer>().material.color.g, other.transform.GetComponent<Renderer>().material.color.b, 1.0f);
+				other.transform.GetComponent<Renderer>().material.color = UnityEngine.Color.yellow; //부딪힌 물체 색상 하얀색으로
+				i = 1.0f;
+			}
 			
 		}
+	}
+	private void OnCollisionExit(Collision collision)
+	{
+		i = 0.0f;
 	}
 
 	void ColorLerp(float or, float og, float ob)
@@ -53,7 +60,7 @@ public class Color : MonoBehaviour {
 		float nc = c+oc - c*oc;
 		float nm = m+om - m*om;
 		float ny = y+oy - y*oy;
-		Debug.Log(nk+" "+nc+" "+nm+" " +ny);
+		
 		transform.GetComponent<Renderer>().material.color = new UnityEngine.Color(CtoR(nk, nc), CtoG(nk, nm), CtoB(nk, ny), 1.0f); // 색상 변환 완료
 	}
 
@@ -66,7 +73,7 @@ public class Color : MonoBehaviour {
 			tmp = g;
 		else
 			tmp = b;
-		Debug.Log(tmp);
+		
 		return 1 - tmp;
 	}
 
@@ -81,7 +88,7 @@ public class Color : MonoBehaviour {
 
 	float RtoY(float k, float b)
 	{
-		Debug.Log(k + " " + b);
+		
 		return (1 - k - b) / (1 - k);
 	}
 
@@ -107,6 +114,7 @@ public class Color : MonoBehaviour {
 		float g = transform.GetComponent<Renderer>().material.color.g;
 		float b = transform.GetComponent<Renderer>().material.color.b;
 
+		Debug.Log(r+" " + g + " " + b);
 		if ((r + g + b / 3) == 0)
 		{
 			Destroy(this.gameObject);

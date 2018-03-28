@@ -126,28 +126,15 @@ GameObject:
   - component: {fileID: 29552760}
   - component: {fileID: 29552759}
   - component: {fileID: 29552758}
-  - component: {fileID: 29552757}
   - component: {fileID: 29552764}
+  - component: {fileID: 29552765}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Mover
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &29552757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 29552756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 481f017828567214487e22ff3bd39f05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  up: 100
-  right: 10
 --- !u!65 &29552758
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -250,6 +237,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ddf636f70ba409b46895ab3fb0cf1eb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &29552765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 29552756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58e1347fdc82bde44b45bb6857555928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &359259828
@@ -439,6 +437,7 @@ GameObject:
   - component: {fileID: 1732349028}
   - component: {fileID: 1732349027}
   - component: {fileID: 1732349026}
+  - component: {fileID: 1732349030}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -502,10 +501,26 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1732349025}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 3.43, y: 6.06, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &1732349030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1732349025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3546f2cf20668484d852f3a40d4f6722, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 29552763}
+  distance: 8
+  height: 2
+  heightDamping: 2
+  rotationDamping: 3
